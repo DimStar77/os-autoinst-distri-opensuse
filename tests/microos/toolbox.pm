@@ -108,7 +108,7 @@ sub run {
     }
 
     record_info 'Test', 'Zypper tests';
-    assert_script_run 'toolbox create -r -c devel';
+    assert_script_run 'toolbox create -r -c devel', 600;
     if (!validate_script_output 'toolbox list', sub { m/devel/ }, timeout => 600, proceed_on_failure => 1) {
         record_info('ISSUE', 'https://github.com/kubic-project/microos-toolbox/issues/23');
     }
