@@ -12,20 +12,27 @@ use parent 'Installation::Navigation::NavigationBase';
 use strict;
 use warnings;
 use testapi;
-use version_utils qw(is_sle);
+use version_utils qw(is_tumbleweed is_staging);
 
 
 sub init {
     my $self = shift;
     $self->SUPER::init();
-    $self->{txb_grub_timeout} = $self->{app}->textbox({id => "\"Bootloader::TimeoutWidget\""}) if (is_sle);
-    $self->{txb_grub_timeout} = $self->{app}->textbox({id => "\"Bootloader::Grub2Widget::TimeoutWidget\""}) if (check_var('FLAVOR', 'Staging-DVD'));
+    my $widget = is_y2bootloader_5() ? "\"Bootloader::Grub2Widget::TimeoutWidget\"" : "\"Bootloader::TimeoutWidget\"";
+    $self->{txb_grub_timeout} = $self->{app}->textbox({id => $widget});
     return $self;
 }
 
 sub is_shown {
     my ($self) = @_;
     $self->{txb_grub_timeout}->exist();
+}
+
+sub is_y2bootloader_5 {
+    # yast2-bootloader 5.x introduced support for different bootloaders than grub, which resulted in the
+    # internal tree structure of the widgets to be updated
+    # to be extended here whenever new version show up with the new yast version
+    return is_tumbleweed || is_staging;
 }
 
 sub set_grub_timeout {
