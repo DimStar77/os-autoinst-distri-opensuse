@@ -133,7 +133,7 @@ if systemctl is-active wickedd >& /dev/null; then
 else
     echo "use dhclient"
     touch dhclient.lease
-    dhclient -pf dhclient.pid -lf dhclient.lease wlan1
+    dhclient -v -pf dhclient.pid -lf dhclient.lease wlan1
     for (( i=0; i < 20 ; i++)) ; do
         echo "wait for DHCP lease..."
         sleep 1;
