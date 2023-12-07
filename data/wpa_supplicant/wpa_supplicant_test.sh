@@ -18,7 +18,7 @@ function cleanup() {
 	rm -f wifi_scan.txt networks.txt status.txt hostapd.com dnsmasq.log dhclinet.log dhclient.pid dhclient.lease
 	rm -f /etc/sysconfig/network/ifcfg-wlan1
 	wpa_cli -i wlan1 terminate >/dev/null 2>/dev/null
-	ip netns pids wifi_master | xargs kill 2> /dev/null || true        # Don't display error messages, as they are misleading
+	ip netns pids wifi_master | xargs -r kill 2> /dev/null || true        # Don't display error messages, as they are misleading
 	ip netns del wifi_master
 }
 
