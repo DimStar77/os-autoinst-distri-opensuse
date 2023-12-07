@@ -131,16 +131,9 @@ if systemctl is-active wickedd >& /dev/null; then
     	sleep 1
     done
 else
-    echo "use dhclient"
+    echo "use busybox udhcpc"
     touch dhclient.lease
-    dhclient -v -pf dhclient.pid -lf dhclient.lease wlan1
-    for (( i=0; i < 20 ; i++)) ; do
-        echo "wait for DHCP lease..."
-        sleep 1;
-        if grep -P 'fixed-address\s+192.168.202.[12]\d\d' dhclient.lease; then
-            break
-        fi
-    done
+    busybox udhcpc -q -n -i wlan1
 fi
 echo "Assigned ip address(es):"
 ip a show

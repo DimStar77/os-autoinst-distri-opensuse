@@ -35,7 +35,7 @@ sub run {
     # Package 'hostapd' requires PackageHub is available
     return unless is_phub_ready();
 
-    zypper_call 'in wpa_supplicant hostapd iw dnsmasq unzip dhcp-client';
+    zypper_call 'in wpa_supplicant hostapd iw dnsmasq unzip busybox';
     assert_script_run 'cd $(mktemp -d)';
     assert_script_run('curl -L -s ' . data_url('wpa_supplicant') . ' | cpio --make-directories --extract && cd data');
     $self->adopt_apparmor;
