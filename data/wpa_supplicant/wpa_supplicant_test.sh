@@ -134,6 +134,7 @@ else
     echo "use busybox udhcpc"
     touch dhclient.lease
     busybox udhcpc -i wlan1
+    sleep 5
 fi
 echo "Assigned ip address(es):"
 ip a show
