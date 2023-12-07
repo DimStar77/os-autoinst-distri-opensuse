@@ -143,6 +143,7 @@ else
     done
 fi
 echo "Assigned ip address(es):"
+ip a show dev wlan1
 ip a show dev wlan1 | grep inet
 ping -c 4 192.168.202.1
 # Success. Ignore further errors in the cleanup process
