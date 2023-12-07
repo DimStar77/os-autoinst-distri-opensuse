@@ -133,7 +133,7 @@ if systemctl is-active wickedd >& /dev/null; then
 else
     echo "use busybox udhcpc"
     touch dhclient.lease
-    busybox udhcpc -q -n -i wlan1
+    busybox udhcpc -i wlan1
 fi
 echo "Assigned ip address(es):"
 ip a show
