@@ -46,6 +46,7 @@
           <li><a href="#qesap_ansible_script_output_file">qesap_ansible_script_output_file</a></li>
           <li><a href="#qesap_ansible_script_output">qesap_ansible_script_output</a></li>
           <li><a href="#qesap_ansible_fetch_file">qesap_ansible_fetch_file</a></li>
+          <li><a href="#qesap_ansible_reg_module">qesap_ansible_reg_module</a></li>
           <li><a href="#qesap_create_aws_credentials">qesap_create_aws_credentials</a></li>
           <li><a href="#qesap_create_aws_config">qesap_create_aws_config</a></li>
           <li><a href="#qesap_remote_hana_public_ips">qesap_remote_hana_public_ips</a></li>
@@ -82,8 +83,6 @@
       </li>
       <li><a href="#qesap_az_clean_old_peerings">qesap_az_clean_old_peerings</a></li>
       <li><a href="#qesap_az_setup_native_fencing_permissions">qesap_az_setup_native_fencing_permissions</a></li>
-      <li><a href="#qesap_az_enable_system_assigned_identity">qesap_az_enable_system_assigned_identity</a></li>
-      <li><a href="#qesap_az_assign_role">qesap_az_assign_role</a></li>
       <li><a href="#qesap_az_get_tenant_id">qesap_az_get_tenant_id</a></li>
       <li><a href="#qesap_az_create_sas_token">qesap_az_create_sas_token</a></li>
       <li><a href="#qesap_az_list_container_files">qesap_az_list_container_files</a></li>
@@ -295,6 +294,10 @@ Test only returns execution result, failure has to be handled by calling method.
 
 </dd>
 <dt id="ERROR_STRING---error-string-to-look-for"><b>ERROR_STRING</b> - error string to look for</dt>
+<dd>
+
+</dd>
+<dt id="destroy_terraform---destroy-terraform-before-retrying-terraform-apply"><b>destroy_terraform</b> - destroy terraform before retrying terraform apply</dt>
 <dd>
 
 </dd>
@@ -610,6 +613,16 @@ Return the local path of the downloaded file.</code></pre>
 
 </dd>
 </dl>
+
+<h3 id="qesap_ansible_reg_module">qesap_ansible_reg_module</h3>
+
+<pre><code>Compose the ansible-playbook argument for the registration.yaml playbook,
+about an additional module registration
+
+-e sles_modules=&#39;[{&quot;key&quot;:&quot;SLES-LTSS-Extended-Security/12.5/x86_64&quot;,&quot;value&quot;:&quot;*******&quot;}]&#39;
+
+Known limitation is that registration.yaml supports multiple modules to be registered,
+this code only supports one.</code></pre>
 
 <h3 id="qesap_create_aws_credentials">qesap_create_aws_credentials</h3>
 
@@ -1090,34 +1103,6 @@ role &#39;Virtual Machine Contributor&#39;</code></pre>
 
 </dd>
 </dl>
-
-<h2 id="qesap_az_enable_system_assigned_identity">qesap_az_enable_system_assigned_identity</h2>
-
-<pre><code>qesap_az_enable_system_assigned_identity($vm_name, $resource_group);
-
-Enables &#39;System assigned identity&#39; for specified VM.
-Returns &#39;systemAssignedIdentity&#39; ID.</code></pre>
-
-<dl>
-
-<dt id="VM_NAME---VM-name1"><b>VM_NAME</b> - VM name</dt>
-<dd>
-
-</dd>
-<dt id="RESOURCE_GROUP---resource-group-resource-belongs-to1"><b>RESOURCE_GROUP</b> - resource group resource belongs to</dt>
-<dd>
-
-</dd>
-</dl>
-
-<h2 id="qesap_az_assign_role">qesap_az_assign_role</h2>
-
-<pre><code>qesap_az_assign_role( assignee=&gt;$assignee, role=&gt;$role, resource_group=&gt;$resource_group )
-
-Assigns defined role to &#39;assignee&#39; (user, vm, etc...) using subscription id.
- assignee - UUID for the resource (VM in this case)
- role - role to be assigned
- resource_group - resource group resource belongs to</code></pre>
 
 <h2 id="qesap_az_get_tenant_id">qesap_az_get_tenant_id</h2>
 
