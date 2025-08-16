@@ -655,7 +655,7 @@ sub bootmenu_default_params {
 
         # gfxpayload variable replaced vga option in grub2
         if (!(is_sle_micro && get_var('BOOT_HDD_IMAGE')) && !is_jeos && !is_microos && !is_selfinstall && (is_i586 || is_x86_64)) {
-            push @params, "vga=791";
+            # push @params, "vga=791";
             my $video = 'video=1024x768';
             push @params, $video;
         }
