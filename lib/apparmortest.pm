@@ -284,6 +284,7 @@ sub setup_mail_server_postfix_dovecot {
     $testfile = "/etc/dovecot/dovecot.conf";
     assert_script_run("echo 'protocols = imap pop3 lmtp' >> $testfile");
 
+    script_run("mkdir -p /etc/dovecot/conf.d");
     $testfile = "/etc/dovecot/conf.d/10-mail.conf";
     assert_script_run("echo 'mail_location = maildir:~/Maildir' >> $testfile");
 
