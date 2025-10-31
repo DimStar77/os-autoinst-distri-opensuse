@@ -149,8 +149,7 @@ sub clean {
 
 sub run {
     select_serial_terminal;
-    my $xsession = is_tumbleweed ? 'gnome-session-xsession' : '';
-    zypper_call("in tigervnc xorg-x11-Xvnc xev expect $xsession");
+    zypper_call("in tigervnc xorg-x11-Xvnc xev expect");
 
     # Check tigervnc version. Test will differ for versions under 1.12
     $tigervnc_vers = script_output("rpm -q tigervnc --qf '\%{version}'");
